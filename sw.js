@@ -1,43 +1,43 @@
-// Nome do cache (mude a versão quando fizer alterações grandes)
-const CACHE_NAME = "rotina-fibro-v1";
+const CACHE_NAME = "fibro-inventario-v1";
 
-// Arquivos principais para cache
-const URLS_TO_CACHE = [
+const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./style.css",
+  "./script.js",
   "./manifest.json"
-  // Se tiver CSS/JS externos ou ícones, adicione aqui também.
+  // Adicione os ícones se quiser:
+  // "./icons/icon-192.png",
+  // "./icons/icon-512.png"
 ];
 
-// Instalação: pré-cache dos arquivos principais
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(URLS_TO_CACHE);
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
 });
 
-// Ativação: limpa caches antigos
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
       )
     )
   );
 });
 
-// Fetch: tenta rede, se falhar usa cache
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
   event.respondWith(
-    fetch(event.request).catch(() => {
-      return caches.match(event.request);
+    caches.match(event.request).then((cached) => {
+      if (cached) return cached;
+      return fetch(event.request);
     })
   );
 });
