@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <title>Inventário da Casa — Fibro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#4b7bec" />
 
-<style>
+  <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
@@ -114,11 +114,11 @@
       padding: 0.4rem 0.6rem;
       border: 1px solid #eee;
     }
-    .summary-food-legend {
-  font-size: 0.72rem;
-  color: #777;
-}
 
+    .summary-food-legend {
+      font-size: 0.72rem;
+      color: #777;
+    }
 
     .group-title {
       margin-top: 0.8rem;
@@ -165,7 +165,6 @@
       gap: 0.25rem;
     }
 
-    /* Quantidade */
     .qty-row {
       display: flex;
       align-items: center;
@@ -192,7 +191,6 @@
       text-align: center;
     }
 
-    /* Ações (editar/excluir) */
     .item-actions {
       display: flex;
       gap: 0.25rem;
@@ -208,17 +206,17 @@
     }
 
     .status-row {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  flex-wrap: wrap;   /* pode deixar wrap, mas eles vão tentar ficar na mesma linha */
-  font-size: 0.75rem;
-}
-.status-sep {
-  font-size: 0.75rem;
-  color: #aaa;
-}
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+    }
 
+    .status-sep {
+      font-size: 0.75rem;
+      color: #aaa;
+    }
 
     .status-pill {
       padding: 0.2rem 0.5rem;
@@ -245,7 +243,6 @@
       font-weight: 600;
     }
 
-    /* Selos de alimentação */
     .food-tags-row {
       display: flex;
       flex-wrap: wrap;
@@ -282,7 +279,6 @@
       background: #ffe5e5;
     }
 
-    /* Kit fim de semana */
     .weekend-pill {
       display: inline-flex;
       align-items: center;
@@ -338,7 +334,6 @@
       cursor: pointer;
     }
 
-    /* Modal de adicionar/editar item */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -522,7 +517,6 @@
 
       let currentEnv = "despensa";
 
-      // controle de edição
       let editingEnv = null;
       let editingId = null;
 
@@ -537,11 +531,8 @@
         farmacia: "💊 Farmácia"
       };
 
-      // === DADOS INICIAIS DO INVENTÁRIO (com qty/unit/shoppingToday/weekendKit/tagHealth) ===
       let inventoryData = {
-        // Hortifruti em Frutas / Legumes / Verduras
         hortifruti: [
-          // Frutas
           { id: "maca", name: "Maçã", group: "Frutas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "mamao", name: "Mamão", group: "Frutas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "banana", name: "Banana prata ou nanica", group: "Frutas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
@@ -553,7 +544,6 @@
           { id: "ameixa", name: "Ameixa", group: "Frutas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "frutas-vermelhas", name: "Frutas vermelhas (frescas ou congeladas)", group: "Frutas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
 
-          // Legumes
           { id: "cebola", name: "Cebola", group: "Legumes", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "alho", name: "Alho", group: "Legumes", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "pimentao", name: "Pimentão", group: "Legumes", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
@@ -570,15 +560,12 @@
           { id: "batata-doce", name: "Batata-doce", group: "Legumes", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "cogumelos", name: "Cogumelos", group: "Legumes", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
 
-          // Verduras
           { id: "alface", name: "Alface", group: "Verduras", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "rucula-agriao", name: "Rúcula ou Agrião", group: "Verduras", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "espinafre", name: "Espinafre", group: "Verduras", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
-          { id: "cebolinha", name: "Salsinha-Cebolinha", group: "Verduras", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
-          
+          { id: "cebolinha", name: "Salsinha-Cebolinha", group: "Verduras", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null }
         ],
 
-        // Laticínios & ovos
         laticinios: [
           { id: "leite", name: "Leite", group: "Laticínios & ovos", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "leite-castanha", name: "Leite Castanha", group: "Laticínios & ovos", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
@@ -588,7 +575,6 @@
           { id: "ovo", name: "Ovo", group: "Laticínios & ovos", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null }
         ],
 
-        // Freezer com 3 subcategorias
         freezer: [
           { id: "filezinho", name: "Filezinho", group: "Proteínas congeladas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "peito-frango", name: "Peito de frango", group: "Proteínas congeladas", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
@@ -693,7 +679,6 @@
           { id: "saco-sacole", name: "Saco sacole", group: "Sacos de lixo", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null }
         ],
 
-        // Farmácia com Medicamentos e Higiene
         farmacia: [
           { id: "puran", name: "Puran", group: "Medicamentos", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
           { id: "bup", name: "Bup", group: "Medicamentos", status: "ok", qty: 0, unit: "UN", shoppingToday: false, weekendKit: false, tagHealth: null },
@@ -704,7 +689,6 @@
         ]
       };
 
-      // === LOCALSTORAGE ===
       function loadState() {
         try {
           const raw = localStorage.getItem("fibroInventoryState");
@@ -726,7 +710,6 @@
         }
       }
 
-      // === TABS ===
       function setActiveTab(tabId) {
         tabButtons.forEach(btn => {
           const thisTab = btn.getAttribute("data-tab");
@@ -747,7 +730,6 @@
         });
       });
 
-      // === AMBIENTE ===
       function setActiveEnvChip() {
         envChips.forEach(chip => {
           const env = chip.getAttribute("data-env");
@@ -765,14 +747,12 @@
         });
       });
 
-      // Helper quantidade
       function formatQty(item) {
         const q = (typeof item.qty === "number" && !isNaN(item.qty)) ? item.qty : 0;
         const unit = item.unit || "UN";
         return `Qtd: ${q} ${unit}`;
       }
 
-      // === RENDER INVENTÁRIO ===
       function renderInventory() {
         const items = inventoryData[currentEnv] || [];
         let total = items.length;
@@ -784,16 +764,15 @@
           else ok++;
         });
 
-       if (summaryBar) {
-  summaryBar.innerHTML = `
-    Itens: ${total} • 🟢 OK: ${ok} • 🟡 Acabando: ${low} • 🔴 Acabou: ${out}
-    <br>
-    <span class="summary-food-legend">
-      ✅ Anti-inflamatório • ⚠️ Usar com moderação • 🚫 Melhor evitar • 🌙 Kit fim de semana
-    </span>
-  `;
-}
-
+        if (summaryBar) {
+          summaryBar.innerHTML = `
+            Itens: ${total} • 🟢 OK: ${ok} • 🟡 Acabando: ${low} • 🔴 Acabou: ${out}
+            <br>
+            <span class="summary-food-legend">
+              ✅ Anti-inflamatório • ⚠️ Usar com moderação • 🚫 Melhor evitar • 🌙 Kit fim de semana
+            </span>
+          `;
+        }
 
         if (!inventoryList) return;
 
@@ -807,7 +786,6 @@
 
         const showFoodMeta = ["hortifruti","laticinios","despensa","freezer"].includes(currentEnv);
 
-
         let currentGroup = "";
         sorted.forEach(item => {
           if (item.group && item.group !== currentGroup) {
@@ -818,24 +796,22 @@
           const tagHealth = item.tagHealth || null;
           const weekendActive = item.weekendKit === true;
 
-let foodTagsHtml = "";
-if (showFoodMeta) {
-  if (!tagHealth) {
-    // Sem classificação: mostra os 3 selos
-    foodTagsHtml = `
-      <span class="food-tag good" data-tag="good">✅</span>
-      <span class="food-tag moderate" data-tag="moderate">⚠️</span>
-      <span class="food-tag avoid" data-tag="avoid">🚫</span>
-    `;
-  } else if (tagHealth === "good") {
-    foodTagsHtml = `<span class="food-tag good active" data-tag="good">✅</span>`;
-  } else if (tagHealth === "moderate") {
-    foodTagsHtml = `<span class="food-tag moderate active" data-tag="moderate">⚠️</span>`;
-  } else if (tagHealth === "avoid") {
-    foodTagsHtml = `<span class="food-tag avoid active" data-tag="avoid">🚫</span>`;
-  }
-}
-
+          let foodTagsHtml = "";
+          if (showFoodMeta) {
+            if (!tagHealth) {
+              foodTagsHtml = `
+                <span class="food-tag good" data-tag="good">✅</span>
+                <span class="food-tag moderate" data-tag="moderate">⚠️</span>
+                <span class="food-tag avoid" data-tag="avoid">🚫</span>
+              `;
+            } else if (tagHealth === "good") {
+              foodTagsHtml = `<span class="food-tag good active" data-tag="good">✅</span>`;
+            } else if (tagHealth === "moderate") {
+              foodTagsHtml = `<span class="food-tag moderate active" data-tag="moderate">⚠️</span>`;
+            } else if (tagHealth === "avoid") {
+              foodTagsHtml = `<span class="food-tag avoid active" data-tag="avoid">🚫</span>`;
+            }
+          }
 
           html += `
             <div class="item-card" data-env="${currentEnv}" data-id="${item.id}">
@@ -854,19 +830,17 @@ if (showFoodMeta) {
                 </div>
               </div>
               <div class="status-row">
-  <span class="status-pill ok ${status === "ok" ? "active" : ""}" data-status="ok">🟢</span>
-  <span class="status-pill low ${status === "low" ? "active" : ""}" data-status="low">🟡</span>
-  <span class="status-pill out ${status === "out" ? "active" : ""}" data-status="out">🔴</span>
+                <span class="status-pill ok ${status === "ok" ? "active" : ""}" data-status="ok">🟢</span>
+                <span class="status-pill low ${status === "low" ? "active" : ""}" data-status="low">🟡</span>
+                <span class="status-pill out ${status === "out" ? "active" : ""}" data-status="out">🔴</span>
 
-  ${showFoodMeta ? `
-    <span class="status-sep">•</span>
-    ${foodTagsHtml}
-    <span class="status-sep">•</span>
-    <span class="weekend-pill ${weekendActive ? "active" : ""}" data-weekend="toggle">🌙</span>
-  ` : ``}
-</div>
-
-
+                ${showFoodMeta ? `
+                  <span class="status-sep">•</span>
+                  ${foodTagsHtml}
+                  <span class="status-sep">•</span>
+                  <span class="weekend-pill ${weekendActive ? "active" : ""}" data-weekend="toggle">🌙</span>
+                ` : ``}
+              </div>
             </div>
           `;
         });
@@ -874,7 +848,6 @@ if (showFoodMeta) {
         inventoryList.innerHTML = html;
       }
 
-      // Clique em status (OK / Acabando / Acabou)
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const pill = e.target.closest(".status-pill");
@@ -901,7 +874,6 @@ if (showFoodMeta) {
         });
       }
 
-      // Clique em + / - quantidade
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const btn = e.target.closest(".qty-btn");
@@ -934,7 +906,6 @@ if (showFoodMeta) {
         });
       }
 
-      // Clique em EDITAR (✎)
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const btn = e.target.closest(".btn-edit");
@@ -965,7 +936,6 @@ if (showFoodMeta) {
         });
       }
 
-      // Clique em EXCLUIR (🗑)
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const btn = e.target.closest(".btn-delete");
@@ -989,7 +959,6 @@ if (showFoodMeta) {
         });
       }
 
-      // Clique em selo alimentar (✅ / ⚠️ / 🚫)
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const tagEl = e.target.closest(".food-tag");
@@ -1011,7 +980,7 @@ if (showFoodMeta) {
           if (!selected) return;
 
           if (item.tagHealth === selected) {
-            item.tagHealth = null; // desmarca se clicar de novo
+            item.tagHealth = null;
           } else {
             item.tagHealth = selected;
           }
@@ -1021,7 +990,6 @@ if (showFoodMeta) {
         });
       }
 
-      // Clique em Kit fim de semana
       if (inventoryList) {
         inventoryList.addEventListener("click", (e) => {
           const pill = e.target.closest(".weekend-pill");
@@ -1046,7 +1014,6 @@ if (showFoodMeta) {
         });
       }
 
-      // === SHOPPING MODE (Lista geral x Compra do dia x Kit) ===
       function setShoppingMode(mode) {
         shoppingMode = mode;
         shoppingModeChips.forEach(chip => {
@@ -1063,7 +1030,6 @@ if (showFoodMeta) {
         });
       });
 
-      // === RENDER LISTA DE COMPRAS ===
       function renderShoppingList() {
         if (!shoppingList) return;
 
@@ -1073,22 +1039,18 @@ if (showFoodMeta) {
         envOrder.forEach(env => {
           const itemsAll = inventoryData[env] || [];
           const filtered = itemsAll.filter(it => {
-  const needsBuy = (it.status === "low" || it.status === "out");
-  const isToday = it.shoppingToday === true;
+            const needsBuy = (it.status === "low" || it.status === "out");
+            const isToday = it.shoppingToday === true;
 
-  if (shoppingMode === "geral") {
-    // Lista geral: só o que está acabando / acabou e NÃO está marcado como "compra do dia"
-    return needsBuy && !isToday;
-  } else if (shoppingMode === "dia") {
-    // Compra do dia: só o que está acabando / acabou E foi marcado como "compra do dia"
-    return needsBuy && isToday;
-  } else if (shoppingMode === "kit") {
-    // Kit fim de semana: qualquer item marcado com 🌙, independente de 🟢🟡🔴
-    return it.weekendKit === true;
-  }
-  return false;
-});
-
+            if (shoppingMode === "geral") {
+              return needsBuy && !isToday;
+            } else if (shoppingMode === "dia") {
+              return needsBuy && isToday;
+            } else if (shoppingMode === "kit") {
+              return it.weekendKit === true;
+            }
+            return false;
+          });
 
           if (!filtered.length) return;
 
@@ -1097,13 +1059,13 @@ if (showFoodMeta) {
           filtered.forEach(item => {
             const checkboxId = `shop-${env}-${item.id}`;
             let statusText;
-if (item.status === "out") {
-  statusText = "🔴 Acabou";
-} else if (item.status === "low") {
-  statusText = "🟡 Acabando";
-} else {
-  statusText = "🟢 OK";
-}
+            if (item.status === "out") {
+              statusText = "🔴 Acabou";
+            } else if (item.status === "low") {
+              statusText = "🟡 Acabando";
+            } else {
+              statusText = "🟢 OK";
+            }
 
             const q = (typeof item.qty === "number" && !isNaN(item.qty)) ? item.qty : 0;
             const unit = item.unit || "UN";
@@ -1144,7 +1106,6 @@ if (item.status === "out") {
         shoppingList.innerHTML = html;
       }
 
-      // Checkbox da lista de compras (item comprado)
       if (shoppingList) {
         shoppingList.addEventListener("change", (e) => {
           const checkbox = e.target.closest("input[type='checkbox']");
@@ -1160,7 +1121,6 @@ if (item.status === "out") {
           const item = items.find(it => it.id === id);
           if (!item) return;
 
-          // Se comprei, volta para OK e sai da compra do dia (mas continua ou não no kit)
           item.status = "ok";
           item.shoppingToday = false;
           saveState();
@@ -1169,7 +1129,6 @@ if (item.status === "out") {
         });
       }
 
-      // Botões 🛒 (geral/kit -> dia) e ↩️ (dia -> geral)
       if (shoppingList) {
         shoppingList.addEventListener("click", (e) => {
           const toTodayBtn = e.target.closest(".btn-to-today");
@@ -1201,7 +1160,6 @@ if (item.status === "out") {
         });
       }
 
-      // === MODAL ADICIONAR / EDITAR ITEM ===
       function openAddModal() {
         editingEnv = null;
         editingId = null;
@@ -1248,7 +1206,6 @@ if (item.status === "out") {
           if (isNaN(qty) || qty < 0) qty = 0;
           const unit = addItemUnit.value || "UN";
 
-          // EDIÇÃO
           if (editingEnv !== null && editingId !== null) {
             const items = inventoryData[editingEnv];
             if (items) {
@@ -1261,7 +1218,6 @@ if (item.status === "out") {
               }
             }
           } else {
-            // NOVO ITEM
             if (!inventoryData[currentEnv]) {
               inventoryData[currentEnv] = [];
             }
@@ -1293,15 +1249,12 @@ if (item.status === "out") {
         });
       }
 
-      // === INICIALIZAÇÃO ===
       loadState();
       setActiveTab("inventario");
       setActiveEnvChip();
       renderInventory();
       setShoppingMode("geral");
     });
-   <script>
-    /* TODO O SEU JS QUE JÁ ESTÁ FUNCIONANDO AÍ EM CIMA */
 
     // ===================== REGISTRO DO SERVICE WORKER =====================
     if ("serviceWorker" in navigator) {
@@ -1316,4 +1269,3 @@ if (item.status === "out") {
   </script>
 </body>
 </html>
-
